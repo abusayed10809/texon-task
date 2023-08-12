@@ -118,9 +118,13 @@ class Name {
   Name({this.title, this.first, this.last});
 
   Name.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    first = json['first'];
-    last = json['last'];
+    try{
+      title = json['title'];
+      first = json['first'];
+      last = json['last'];
+    } catch(error){
+      print('name model error: $error');
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -137,22 +141,26 @@ class Location {
   String? city;
   String? state;
   String? country;
-  int? postcode;
+  String? postcode;
   Coordinates? coordinates;
   Timezone? timezone;
 
   Location({this.street, this.city, this.state, this.country, this.postcode, this.coordinates, this.timezone});
 
   Location.fromJson(Map<String, dynamic> json) {
-    street = json['street'] != null ? Street.fromJson(json['street']) : null;
-    city = json['city'];
-    state = json['state'];
-    country = json['country'];
-    if (json['postcode'] != null) {
-      postcode = int.parse(json['postcode'].toString());
+    try{
+      street = json['street'] != null ? Street.fromJson(json['street']) : null;
+      city = json['city'];
+      state = json['state'];
+      country = json['country'];
+      if (json['postcode'] != null) {
+        postcode = (json['postcode'].toString());
+      }
+      coordinates = json['coordinates'] != null ? Coordinates.fromJson(json['coordinates']) : null;
+      timezone = json['timezone'] != null ? Timezone.fromJson(json['timezone']) : null;
+    } catch(error){
+      print('location model error: $error');
     }
-    coordinates = json['coordinates'] != null ? Coordinates.fromJson(json['coordinates']) : null;
-    timezone = json['timezone'] != null ? Timezone.fromJson(json['timezone']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -204,8 +212,12 @@ class Coordinates {
   Coordinates({this.latitude, this.longitude});
 
   Coordinates.fromJson(Map<String, dynamic> json) {
-    latitude = json['latitude'];
-    longitude = json['longitude'];
+    try{
+      latitude = json['latitude'];
+      longitude = json['longitude'];
+    } catch(error){
+      print('coordinate model error: $error');
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -223,8 +235,12 @@ class Timezone {
   Timezone({this.offset, this.description});
 
   Timezone.fromJson(Map<String, dynamic> json) {
-    offset = json['offset'];
-    description = json['description'];
+    try{
+      offset = json['offset'];
+      description = json['description'];
+    } catch(error){
+      print('timezone model error: $error');
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -247,13 +263,17 @@ class Login {
   Login({this.uuid, this.username, this.password, this.salt, this.md5, this.sha1, this.sha256});
 
   Login.fromJson(Map<String, dynamic> json) {
-    uuid = json['uuid'];
-    username = json['username'];
-    password = json['password'];
-    salt = json['salt'];
-    md5 = json['md5'];
-    sha1 = json['sha1'];
-    sha256 = json['sha256'];
+    try{
+      uuid = json['uuid'];
+      username = json['username'];
+      password = json['password'];
+      salt = json['salt'];
+      md5 = json['md5'];
+      sha1 = json['sha1'];
+      sha256 = json['sha256'];
+    } catch(error){
+      print('login model error: $error');
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -299,8 +319,12 @@ class Id {
   Id({this.name, this.value});
 
   Id.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    value = json['value'];
+    try{
+      name = json['name'];
+      value = json['value'];
+    } catch(error){
+      print('id model error: $error');
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -319,9 +343,13 @@ class Picture {
   Picture({this.large, this.medium, this.thumbnail});
 
   Picture.fromJson(Map<String, dynamic> json) {
-    large = json['large'];
-    medium = json['medium'];
-    thumbnail = json['thumbnail'];
+    try{
+      large = json['large'];
+      medium = json['medium'];
+      thumbnail = json['thumbnail'];
+    } catch(error){
+      print('picture model error: $error');
+    }
   }
 
   Map<String, dynamic> toJson() {

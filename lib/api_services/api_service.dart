@@ -3,13 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class ApiService {
+  final Dio dio = Dio();
 
   Future<dynamic> getResponse({required String url}) async {
     dynamic responseJson;
 
     Response response;
     try {
-      final Dio dio = Dio();
       response = await dio.get(url);
       responseJson = returnResponse(response: response);
       return responseJson;
