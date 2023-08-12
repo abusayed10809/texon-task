@@ -26,7 +26,7 @@ void main() {
   test('repository test', () async {
     FriendsRepository friendsRepository = FriendsRepository();
 
-    final Either<String, List<FriendModel>> either = await friendsRepository.fetchPostList(page: 1);
+    final Either<String, List<FriendModel>> either = await friendsRepository.fetchFriendsList(page: 1);
 
     either.fold(
       (l) {

@@ -1,10 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:friends_app/controller/friend_controller.dart';
+import 'package:friends_app/model/friends_list_model.dart';
+import 'package:get/get.dart';
 
-class FriendsListScreen extends StatelessWidget {
+class FriendsListScreen extends GetView<FriendController> {
   const FriendsListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Container(
+        width: Get.width,
+        height: Get.height,
+        padding: EdgeInsets.symmetric(
+          horizontal: Get.width * 0.025,
+          vertical: Get.height * 0.02,
+        ),
+        child: Obx(
+          () {
+            if(controller.friendsList.isNotEmpty){
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: Get.height * 0.02,
+                  crossAxisSpacing: Get.width * 0.025,
+                  mainAxisExtent: Get.height * 0.3,
+
+                ),
+                itemCount: controller.friendsList.length,
+                itemBuilder: (context, index) {
+                  FriendModel friendModel = controller.friendsList[index];
+                  return Container(
+                    width: Get.width*0.4,
+                    height: Get.height * 0.4,
+                    color: Colors.grey[100],
+                    child: Column(
+                      children: [
+                        ///
+                        /// portrait
+                        Image.network(
+                          friendModel.picture!.large ?? '',
+                          width: Get.width * 0.45,
+                          height: Get.height * 0.2,
+                          fit: BoxFit.cover,
+                        ),
+
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+
+                        ///
+                        /// full name
+                        Text(
+                          ('${friendModel.name?.title} ' ?? '') + ('${friendModel.name?.first} ' ?? '') + ('${friendModel.name?.last}' ?? ''),
+                          style: TextStyle(
+                            fontSize: Get.textScaleFactor * 15,
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: Get.height * 0.03,
+                        ),
+
+                        ///
+                        /// country
+                        Text(
+                          friendModel.location?.country ?? '',
+                          style: TextStyle(
+                            fontSize: Get.textScaleFactor * 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            } else if(controller.errorMessage.isNotEmpty){
+              return Center(
+                child: Text(
+                  controller.errorMessage.value,
+                ),
+              );
+            } else if(controller.isFriendsListLoading.value){
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
+      ),
+    );
   }
 }

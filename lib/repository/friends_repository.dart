@@ -6,7 +6,7 @@ import 'package:friends_app/utils/api_constants.dart';
 class FriendsRepository {
   final ApiService apiService = ApiService();
 
-  Future<Either<String, List<FriendModel>>> fetchPostList({required int page}) async {
+  Future<Either<String, List<FriendModel>>> fetchFriendsList({required int page}) async {
     try {
       dynamic response = await apiService.getResponse(url: '${ApiConstants.baseUrl}/?results=10&page=$page');
       FriendsListModel friendsListModel = FriendsListModel.fromJson(response);
