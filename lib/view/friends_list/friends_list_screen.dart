@@ -24,15 +24,24 @@ class FriendsListScreen extends GetView<FriendController> {
               child: Obx(
                 () {
                   if (controller.friendsList.isNotEmpty) {
+                    int friendItemCount = controller.friendsList.length;
+                    if(controller.loadingMore.value){
+                      friendItemCount+= 2;
+                    }
                     return GridView.builder(
+                      controller: controller.scrollController,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: Get.height * 0.02,
                         crossAxisSpacing: Get.width * 0.025,
                         mainAxisExtent: Get.height * 0.3,
                       ),
-                      itemCount: controller.friendsList.length,
+                      itemCount: friendItemCount,
                       itemBuilder: (context, index) {
+                        if(controller.loadingMore.value && (index == friendItemCount-1 || index == friendItemCount-2)){
+                          return const Center(child: CircularProgressIndicator());
+                        }
+
                         FriendModel friendModel = controller.friendsList[index];
                         return GestureDetector(
                           onTap: (){
@@ -112,6 +121,7 @@ class FriendsListScreen extends GetView<FriendController> {
                 () {
                   if (controller.friendsList.isNotEmpty) {
                     return GridView.builder(
+                      controller: controller.scrollController,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: Get.height * 0.02,
