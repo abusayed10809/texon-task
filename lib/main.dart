@@ -4,7 +4,7 @@ import 'package:friends_app/routes/app_routes.dart';
 import 'package:friends_app/view_controller_binding/view_controller_binding.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
