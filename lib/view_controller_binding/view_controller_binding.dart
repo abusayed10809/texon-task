@@ -6,9 +6,6 @@ class ViewModelBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<FriendController>(
       () => FriendController(),
-      fenix: true,
     );
-    // Get.lazyPut<PostListViewModel>(() => PostListViewModel(), fenix: true);
-    // Get.lazyPut<SplashScreenController>(() => SplashScreenController(), fenix: true);
   }
 }

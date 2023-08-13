@@ -8,9 +8,11 @@ class FriendController extends GetxController {
   RxBool isFriendsListLoading = false.obs;
   RxList friendsList = List<FriendModel>.empty(growable: true).obs;
   RxString errorMessage = ''.obs;
+  Rx<FriendModel> friendModel = FriendModel().obs;
 
   @override
   void onInit() {
+    print('init method called');
     getFriendsList();
     super.onInit();
   }
@@ -30,5 +32,9 @@ class FriendController extends GetxController {
     );
 
     isFriendsListLoading.value = false;
+  }
+
+  setFriendDetailsModel({required FriendModel newFriendModel}){
+    friendModel.value = newFriendModel;
   }
 }
