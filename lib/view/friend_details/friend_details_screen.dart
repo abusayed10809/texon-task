@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:friends_app/controller/details_controller.dart';
 import 'package:friends_app/controller/friend_controller.dart';
 import 'package:friends_app/model/friends_list_model.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FriendDetailsScreen extends GetView<FriendController> {
+class FriendDetailsScreen extends GetView<EnemyController> {
   const FriendDetailsScreen({Key? key}) : super(key: key);
 
   @override
@@ -24,7 +25,7 @@ class FriendDetailsScreen extends GetView<FriendController> {
                 ),
                 child: Obx(
                       () {
-                    FriendModel friendModel = controller.friendModel.value;
+                    FriendModel friendModel = controller.enemyFriendModel.value;
                     return Column(
                       children: [
                         ///
@@ -133,7 +134,7 @@ class FriendDetailsScreen extends GetView<FriendController> {
                 ),
                 child: Obx(
                       () {
-                    FriendModel friendModel = controller.friendModel.value;
+                    FriendModel friendModel = controller.enemyFriendModel.value;
                     return Column(
                       children: [
                         ///

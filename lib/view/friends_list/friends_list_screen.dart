@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friends_app/controller/details_controller.dart';
 import 'package:friends_app/controller/friend_controller.dart';
 import 'package:friends_app/model/friends_list_model.dart';
 import 'package:friends_app/routes/app_routes.dart';
@@ -10,6 +11,7 @@ class FriendsListScreen extends GetView<FriendController> {
 
   @override
   Widget build(BuildContext context) {
+    EnemyController enemyController = Get.find<EnemyController>();
     return Scaffold(
       body: SafeArea(
         child: OrientationBuilder(builder: (context, orientation) {
@@ -45,7 +47,13 @@ class FriendsListScreen extends GetView<FriendController> {
                         FriendModel friendModel = controller.friendsList[index];
                         return GestureDetector(
                           onTap: (){
-                            controller.setFriendDetailsModel(newFriendModel: friendModel);
+                            // controller.setFriendDetailsModel(newFriendModel: friendModel);
+
+
+                            enemyController.setFriendDetailsModel(
+                              newFriendModel: friendModel,
+                            );
+
                             Get.toNamed(AppRoutes.friendDetailsScreen);
                           },
                           child: Container(
